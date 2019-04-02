@@ -5,7 +5,7 @@ const int N=10;
 
 //implementacja tablicy asocjacyjnej z adresowaniem otwartym
 struct Data{
-    int index;
+    int licznik;
     int value;
 };
 struct key{
@@ -91,17 +91,23 @@ int number(int A[N], int x){
     int counter=0;
     for(int i=0; i<N; i++){
         if(find(tab, x-A[i])!=-1){
-            counter++;
-            cout<<A[i]<<" "<<x-A[i]<<endl;
+            counter+=tab[find(tab, x-A[i])]->data1->licznik;
         }
-        tmp= new Data;
-        tmp->value=A[i]; tmp->index=i;
-        insert(tab, tmp->value, tmp);
+        if(find(tab, A[i])!=-1) tab[find(tab, A[i])]->data1->licznik++;
+        else{
+            tmp= new Data;
+            tmp->value=A[i]; tmp->licznik=1;
+            insert(tab, tmp->value, tmp);
+        }
+
     }
 
     return counter;
 }
 int main() {
+
+    int A[N]={2, 5, 3, 4, 4, 10, 2, 7, 9, 1};
+    cout<<number(A, 8);
 
     return 0;
 }
