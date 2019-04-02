@@ -62,7 +62,7 @@ void remove(key *tab[M], int k){
 
 void repair(key *tab[M]){
     Data *pom[M];
-    int end=-1;
+    int ending=-1;
     for(int i=0; i<M; i++){
         if(!tab[i]->is_free){
             int kn=Hash2(tab[i]->value, 0);
@@ -71,7 +71,8 @@ void repair(key *tab[M]){
                     tab[kn]->value=tab[i]->value; tab[kn]->is_free=false; tab[kn]->deleted=false; tab[kn]->data1=tab[i]->data1;
                 }
                 else{
-                    pom[end++]=tab[i]->data1;
+                    ending++;
+                    pom[ending]=tab[i]->data1;
                 }
                 tab[i]->value=0;tab[i]->deleted=true; tab[i]->is_free=true; tab[i]->data1= nullptr;
             }
