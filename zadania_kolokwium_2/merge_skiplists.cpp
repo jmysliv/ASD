@@ -14,7 +14,7 @@ struct skiplist{
 };
 
 skiplist merge(skiplist A, skiplist B){
-    node **last_A;
+    node **last_A = new node*[MAX_LEVEL];
     for(int i=0; i<MAX_LEVEL; i++) last_A[i] = A.first;
     node *p=A.first->next[0]; node *q=B.first->next[0];
 
