@@ -74,6 +74,7 @@ int Mst(Edge *edges){
     int distance = 0;
     while(edges!=NULL){
         Union(parent, rank, distance, edges);
+        edges=edges->next;
     }
     return distance;
 }
