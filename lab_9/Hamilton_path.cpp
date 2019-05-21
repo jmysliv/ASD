@@ -1,27 +1,18 @@
 #include <iostream>
-#include <stack>
 using namespace std;
 const int N=10;
 
-bool is_okay(bool tab[N][N], int v, bool used[N], int counter, int first){
-    if(counter==N && tab[v][first]) return true;
-    else if(counter==N) return false;
-    for(int i=0; i<N; i++){
-        if(tab[v][i] && !used[i]){
-            used[i]=true;
-            if(is_okay(tab, i, used, counter + 1, first)) return true;
-            used[i]=false;
-        }
+bool dfs(bool tab[N][N], int i, int counter){
+    if(counter==N) return true;
+    for(int j=0; j<N; j++){
+        if(tab[i][j] && dfs(tab, j, counter + 1)) return true;
     }
     return false;
 }
 bool hamilton_path(bool tab[N][N]){
-    bool used[N];
-    used[0]=true;
-    for(int i=1; i<N; i++){
-        used[i]=false;
+    for(int i=0; i<N; i++){
+        if(dfs(tab, i, 1)) return true;
     }
-    if(is_okay(tab, 0, used, 1, 0)) return true;
     return false;
 }
 
